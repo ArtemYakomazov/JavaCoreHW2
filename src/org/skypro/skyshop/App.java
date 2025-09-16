@@ -1,12 +1,13 @@
 package org.skypro.skyshop;
+
 import org.skypro.skyshop.article.Article;
+import org.skypro.skyshop.article.BestResultsNotFound;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.discounted.DiscountedProduct;
 import org.skypro.skyshop.product.fixPrice.FixPriceProduct;
 import org.skypro.skyshop.product.simple.SimpleProduct;
 import org.skypro.skyshop.article.SearchEngine;
-import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -35,16 +36,33 @@ public class App {
         engine.add(article3);
         engine.add(article4);
         engine.add(article5);
-        System.out.println(Arrays.toString(engine.search("Хлеб")));
-        System.out.println(Arrays.toString(engine.search("Сыр")));
-        System.out.println(Arrays.toString(engine.search("Майонез")));
+//        System.out.println(Arrays.toString(engine.search("Хлеб")));
+//        System.out.println(Arrays.toString(engine.search("Сыр")));
+//        System.out.println(Arrays.toString(engine.search("Майонез")));
+        try {
+            engine.findBestMatch("хлеб");
+        } catch (BestResultsNotFound e) {
+            System.err.println("Результат не найден");
+        }
+
+        try {
+            engine.findBestMatch("сыр");
+        } catch (BestResultsNotFound e) {
+            System.err.println("Результат не найден");
+        }
+
+        try {
+            engine.findBestMatch("торт");
+        } catch (BestResultsNotFound e) {
+            System.err.println("Результат не найден");
+        }
     }
 
     private static ProductBasket getProductBasket() {
         ProductBasket productBasket = new ProductBasket();
-        Product product1 = new SimpleProduct("Хлеб", 50);
-        Product product2 = new DiscountedProduct("Молоко", 60, 10);
-        Product product3 = new DiscountedProduct("Колбаса", 300, 15);
+        Product product1 = new SimpleProduct("   ", 30);
+        Product product2 = new DiscountedProduct("Молоко", 60, 123);
+        Product product3 = new DiscountedProduct("Колбаса", -12, 15);
         Product product4 = new FixPriceProduct("Сыр");
         Product product5 = new FixPriceProduct("Майонез");
 

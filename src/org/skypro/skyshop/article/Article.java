@@ -21,7 +21,7 @@ public final class Article implements Searchable {
 
     @Override
     public String getTypeContent() {
-        return "ARTICLE";
+        return "";
     }
 
     @Override

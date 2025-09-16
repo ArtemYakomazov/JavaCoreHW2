@@ -10,14 +10,30 @@ public class DiscountedProduct extends Product {
         super(name);
         this.basePrice = basePrice;
         this.discount = discount;
+        try {
+            checkBasePriceException(basePrice);
+            checkDiscountException(discount);
+        } catch (NullPointerException e) {
+            System.err.println("Недействительная цена");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Недействительный процент");
+        }
+    }
+
+    public static void checkBasePriceException(double basePrice) {
+        if (basePrice <= 0) {
+            throw new NullPointerException("Недействительная цена");
+        }
+    }
+
+    public static void checkDiscountException(int discount) {
+        if (discount < 0 || discount > 100) {
+            throw new IllegalArgumentException("Недействительный процент");
+        }
     }
 
     public int getDiscount() {
-        if (discount > 0 && discount < 100) {
-            return discount;
-        } else {
-            throw new RuntimeException("Неверный процент");
-        }
+        return discount;
     }
 
     @Override

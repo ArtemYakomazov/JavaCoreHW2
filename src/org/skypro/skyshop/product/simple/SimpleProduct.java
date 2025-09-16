@@ -8,6 +8,16 @@ public class SimpleProduct extends Product {
     public SimpleProduct(String name, int price) {
         super(name);
         this.price = price;
+        try {
+            checkPriceException(price);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Недействительная цена");
+        }
+    }
+    public static void checkPriceException(int price) {
+        if (price <= 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -17,7 +27,7 @@ public class SimpleProduct extends Product {
 
     @Override
     public String toString() {
-        return getName() + ": " + (int)getPrice();
+        return getName() + ": " + (int) getPrice();
     }
 
     @Override
