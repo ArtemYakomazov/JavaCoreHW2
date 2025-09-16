@@ -22,4 +22,19 @@ public class FixPriceProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public String searchTerm() {
+        return super.searchTerm();
+    }
+
+    @Override
+    public String getTypeContent() {
+        return super.getTypeContent();
+    }
 }
