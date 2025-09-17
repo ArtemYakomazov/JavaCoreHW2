@@ -53,7 +53,7 @@ public class SearchEngine {
         }
 
         if (bestMatch == null) {
-            throw new BestResultsNotFound();
+            throw new BestResultsNotFound(search);
         }
         System.out.println(bestMatch.getStringRepresentation());
         return bestMatch;

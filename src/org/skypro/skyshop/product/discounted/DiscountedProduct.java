@@ -8,28 +8,14 @@ public class DiscountedProduct extends Product {
 
     public DiscountedProduct(String name, double basePrice, int discount) {
         super(name);
-        this.basePrice = basePrice;
-        this.discount = discount;
-        try {
-            checkBasePriceException(basePrice);
-            checkDiscountException(discount);
-        } catch (NullPointerException e) {
-            System.err.println("Недействительная цена");
-        } catch (IllegalArgumentException e) {
-            System.err.println("Недействительный процент");
-        }
-    }
-
-    public static void checkBasePriceException(double basePrice) {
         if (basePrice <= 0) {
-            throw new NullPointerException("Недействительная цена");
+            throw new IllegalArgumentException("Недействительная цена");
         }
-    }
-
-    public static void checkDiscountException(int discount) {
         if (discount < 0 || discount > 100) {
             throw new IllegalArgumentException("Недействительный процент");
         }
+        this.basePrice = basePrice;
+        this.discount = discount;
     }
 
     public int getDiscount() {
