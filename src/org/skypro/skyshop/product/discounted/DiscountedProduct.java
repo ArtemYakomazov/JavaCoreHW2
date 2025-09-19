@@ -8,16 +8,18 @@ public class DiscountedProduct extends Product {
 
     public DiscountedProduct(String name, double basePrice, int discount) {
         super(name);
+        if (basePrice <= 0) {
+            throw new IllegalArgumentException("Недействительная цена");
+        }
+        if (discount < 0 || discount > 100) {
+            throw new IllegalArgumentException("Недействительный процент");
+        }
         this.basePrice = basePrice;
         this.discount = discount;
     }
 
     public int getDiscount() {
-        if (discount > 0 && discount < 100) {
-            return discount;
-        } else {
-            throw new RuntimeException("Неверный процент");
-        }
+        return discount;
     }
 
     @Override

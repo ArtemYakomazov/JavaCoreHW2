@@ -42,13 +42,13 @@ public class ProductBasket {
                 return;
             }
         }
-        for (Product product : products) {
-            if (product.isSpecial()) {
-                specialProducts++;
+            for (Product product : products) {
+                if (product.isSpecial()) {
+                    specialProducts++;
+                }
             }
-        }
         System.out.println("Итого: " + getTotalPrice());
-        System.out.println("Специальных товаров: "+specialProducts);
+        System.out.println("Специальных товаров: " + specialProducts);
     }
 
     public boolean hasProduct(String name) {
@@ -57,6 +57,7 @@ public class ProductBasket {
                 return true;
             }
         }
+
         return false;
     }
 

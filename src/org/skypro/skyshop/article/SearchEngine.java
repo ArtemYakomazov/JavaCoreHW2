@@ -30,4 +30,33 @@ public class SearchEngine {
         }
         return results;
     }
+
+    public Searchable findBestMatch(String search) throws BestResultsNotFound {
+        Searchable bestMatch = null;
+        int found = 0;
+
+        for (Searchable searchable : searchableItems) {
+            if (searchable != null) {
+                String str = searchable.searchTerm().toLowerCase();
+                int score = 0;
+                int index = 0;
+                while ((index = str.indexOf(search.toLowerCase(), index)) != -1) {
+                    score++;
+                    index++;
+                }
+
+                if (score > found) {
+                    found = count;
+                    bestMatch = searchable;
+                }
+            }
+        }
+
+        if (bestMatch == null) {
+            throw new BestResultsNotFound(search);
+        }
+        System.out.println(bestMatch.getStringRepresentation());
+        return bestMatch;
+    }
+
 }
