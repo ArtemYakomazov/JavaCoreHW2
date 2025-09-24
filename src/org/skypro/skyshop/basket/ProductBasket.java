@@ -2,24 +2,22 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ProductBasket {
-    private final Product[] products;
+    private final List<Product> products;
     private int size;
 
     public ProductBasket() {
-        this.products = new Product[5];
+        this.products = new LinkedList<>();
         this.size = 0;
     }
 
     public void addProduct(Product product) {
-        if (size < products.length) {
-            products[size] = product;
-            size++;
-        } else {
-            System.out.println("Невозможно добавить продукт");
-        }
+        products.add(product);
+        size++;
     }
 
     public double getTotalPrice() {
@@ -42,11 +40,11 @@ public class ProductBasket {
                 return;
             }
         }
-            for (Product product : products) {
-                if (product.isSpecial()) {
-                    specialProducts++;
-                }
+        for (Product product : products) {
+            if (product.isSpecial()) {
+                specialProducts++;
             }
+        }
         System.out.println("Итого: " + getTotalPrice());
         System.out.println("Специальных товаров: " + specialProducts);
     }
@@ -61,8 +59,20 @@ public class ProductBasket {
         return false;
     }
 
-    public void clear() {
-        Arrays.fill(products, null);
+    public void deleteProductByName(String name) {
+        List<Product> deleteProducts = new LinkedList<>();
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getName().equals(name)) {
+                deleteProducts.add(product);
+                iterator.remove();
+            }
+        }
+        if (deleteProducts.isEmpty()) {
+            System.out.println("Список пуст");
+        } else {
+            System.out.println("Удаленные продукты: " + deleteProducts);
+        }
     }
-
 }
