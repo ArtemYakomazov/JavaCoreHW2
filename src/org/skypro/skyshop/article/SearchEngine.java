@@ -1,37 +1,33 @@
 package org.skypro.skyshop.article;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class SearchEngine {
-    private final Searchable[] searchableItems;
+    private final List<Searchable> searchableItems;
     private int count = 0;
 
 
-    public SearchEngine(int size) {
-        searchableItems = new Searchable[size];
+    public SearchEngine() {
+        searchableItems = new LinkedList<>();
     }
 
     public void add(Searchable item) {
-        if (count < searchableItems.length) {
-            searchableItems[count++] = item;
-        }
+        searchableItems.add(item);
+        count++;
     }
 
-    public Searchable[] search(String term) {
-        Searchable[] results = new Searchable[5];
-        int resultCount = 0;
-
+    public List<Searchable> search(String term) {
+        List<Searchable> result = new LinkedList<>();
         for (Searchable item : searchableItems) {
-            if (item != null && item.searchTerm().contains(term)) {
-                if (resultCount < 5) {
-                    results[resultCount++] = item;
-                } else {
-                    break;
-                }
+            if (item.searchTerm().toLowerCase().contains(term.toLowerCase())) {
+                result.add(item);
             }
         }
-        return results;
+        return result;
     }
 
-    public Searchable findBestMatch(String search) throws BestResultsNotFound {
+    public void findBestMatch(String search) throws BestResultsNotFound {
         Searchable bestMatch = null;
         int found = 0;
 
@@ -56,7 +52,6 @@ public class SearchEngine {
             throw new BestResultsNotFound(search);
         }
         System.out.println(bestMatch.getStringRepresentation());
-        return bestMatch;
     }
 
 }
