@@ -23,11 +23,8 @@ public class App {
         engine.findBestMatch("сыр");
 
         productBasket.deleteProductByName("Хлеб");
-
         productBasket.printProductBasket();
-
         productBasket.deleteProductByName("Мыло");
-
         productBasket.printProductBasket();
     }
 
