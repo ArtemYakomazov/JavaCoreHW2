@@ -1,17 +1,15 @@
 package org.skypro.skyshop.article;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+
+import java.util.*;
 
 public class SearchEngine {
-    private final List<Searchable> searchableItems;
+    private final Set<Searchable> searchableItems;
     private int count = 0;
 
 
     public SearchEngine() {
-        searchableItems = new LinkedList<>();
+        searchableItems = new HashSet<>();
     }
 
     public void add(Searchable item) {
@@ -19,11 +17,11 @@ public class SearchEngine {
         count++;
     }
 
-    public Map<String, Searchable> search(String term) {
-        Map<String,Searchable> result = new TreeMap<>();
+    public Set<Searchable> search(String term) {
+        Set<Searchable> result = new TreeSet<>(new sortedTitleComparator());
         for (Searchable item : searchableItems) {
             if (item.searchTerm().toLowerCase().contains(term.toLowerCase())) {
-                result.put(item.getName(),item);
+                result.add(item);
             }
         }
         return result;
@@ -56,4 +54,8 @@ public class SearchEngine {
         System.out.println(bestMatch.getStringRepresentation());
     }
 
+    @Override
+    public String toString() {
+        return "Статьи" + searchableItems;
+    }
 }

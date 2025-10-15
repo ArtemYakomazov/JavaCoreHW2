@@ -1,5 +1,4 @@
 package org.skypro.skyshop;
-
 import org.skypro.skyshop.article.Article;
 import org.skypro.skyshop.article.BestResultsNotFound;
 import org.skypro.skyshop.product.Product;
@@ -17,7 +16,7 @@ public class App {
         SearchEngine engine = getSearchEngine();
         System.out.println(engine.search("Хлеб"));
         System.out.println(engine.search("Сыр"));
-        System.out.println(engine.search("Майонез"));
+        System.out.println(engine.search("Шампиньоны"));
 
         engine.findBestMatch("Хлеб");
         engine.findBestMatch("сыр");
@@ -26,21 +25,24 @@ public class App {
         productBasket.printProductBasket();
         productBasket.deleteProductByName("Мыло");
         productBasket.printProductBasket();
+        System.out.println();
+        System.out.println(engine);
     }
 
     private static SearchEngine getSearchEngine() {
-        Article article1 = new Article("Хлебный колос", "Производство хлеба");
-        Article article2 = new Article("Молочная продукция", "Добыча молока");
-        Article article3 = new Article("Виды колбас", "Колбасные нарезки");
-        Article article4 = new Article("Сыры мира", "Благородные сыры");
-        Article article5 = new Article("Майонез в домашних условиях", "Рецепт майонеза");
+        Article article1 = new Article("Сыр", "Благородные сыры");
+        Article article2 = new Article("Хлеб", "Производство хлеба");
+        Article article3 = new Article("Колбаски", "Колбасные нарезки");
+        Article article4 = new Article("Шампиньоны", "Выращивание шампиньонов");
+
 
         SearchEngine engine = new SearchEngine();
         engine.add(article1);
         engine.add(article2);
         engine.add(article3);
         engine.add(article4);
-        engine.add(article5);
+        engine.add(article1);
+        engine.add(article2);
         return engine;
     }
 
@@ -66,7 +68,7 @@ public class App {
         }
         Product product4 = new FixPriceProduct("Сыр");
         productBasket.addProduct(product4);
-        Product product5 = new FixPriceProduct("Майонез");
+        Product product5 = new FixPriceProduct("Шампиньоны");
         productBasket.addProduct(product5);
         return productBasket;
     }
