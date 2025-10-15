@@ -2,6 +2,7 @@ package org.skypro.skyshop.article;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
     private final Set<Searchable> searchableItems;
@@ -18,13 +19,10 @@ public class SearchEngine {
     }
 
     public Set<Searchable> search(String term) {
-        Set<Searchable> result = new TreeSet<>(new sortedTitleComparator());
-        for (Searchable item : searchableItems) {
-            if (item.searchTerm().toLowerCase().contains(term.toLowerCase())) {
-                result.add(item);
-            }
-        }
-        return result;
+        return searchableItems.stream()
+                .filter(s -> s.searchTerm().contains(term))
+                .limit(5)
+                .collect(Collectors.toCollection(()->new TreeSet<>(new sortedTitleComparator())));
     }
 
     public void findBestMatch(String search) throws BestResultsNotFound {
